@@ -60,7 +60,7 @@ export default function SignUpPage() {
 
         <button className="signup-continue">Continue</button>
 
-        <Link href="/login" className="signup-haveacc">Already have an account?</Link>
+        <p className="signup-haveacc">Already have an account?</p>
 
         {/* Back Button */}
         <Link href="/" className="signup-back">

@@ -57,7 +57,7 @@ export default function LoginPage() {
           placeholder="Enter your Password"
           className="login-input"
         />
-
+  
         <button className="login-continue">Continue</button>
 
         <p className="login-forgot">Forgot Password?</p>
