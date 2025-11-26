@@ -1,0 +1,251 @@
+.mobile-frame {
+  /* height: 92vh;
+  max-height: 92vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px; */
+  width: 325px;
+  /* similar to screenshot */
+  height: 659px;
+  /* similar to screenshot */
+  background-color: #cbe9ff;
+  border-radius: 10px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16;
+  position: relative;
+}
+
+/* header */
+.journey-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.journey-header-logo img {
+  display: block;
+}
+
+.journey-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+
+/* content */
+.journey-content {
+  padding: 36px 18px 24px 18px;
+  /* top padding lebih besar karena avatar */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.journey-content {
+  max-height: none;
+  /* allow content to grow, whole frame scrolls */
+  overflow: visible;
+  padding: 24px 18px;
+  /* keep nice padding */
+}
+
+.mobile-frame::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.mobile-frame::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.mobile-frame {
+  scrollbar-width: none;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f1724;
+  margin: 2px 0 4px 0;
+  text-align: left;
+}
+
+.label {
+  font-size: 13px;
+  color: #0f1724;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.label.small {
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 2px solid rgba(31, 41, 55, 0.12);
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+/* wrapper baris upload */
+.upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+/* tombol upload yang terlihat */
+.upload-button {
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: 3px solid #0b2540;
+  background: #eaf4ff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.upload-button:hover {
+  background: #d7eaff;
+}
+
+/* input file asli disembunyikan */
+.hidden-file-input {
+  display: none;
+}
+
+/* AI detection block */
+.ai-detect-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ai-label {
+  font-weight: 600;
+}
+
+.ai-safe {
+  font-weight: 800;
+  color: #22c55e;
+}
+
+.hidden-checkbox {
+  display: none;
+}
+
+.checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.fake-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 8px;
+  background: #0f1724;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0f1724;
+}
+
+.hidden-checkbox:checked+.fake-checkbox {
+  background: #0f1724;
+}
+
+.hidden-checkbox:checked+.fake-checkbox::after {
+  content: '✓';
+  color: #fff;
+  font-weight: 800;
+}
+
+/* preview */
+.preview-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid rgba(31, 41, 55, 0.08);
+}
+
+/* action buttons */
+.action-button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+}
+
+.action-button.start {
+  background: #d1fae5;
+  border-color: #34d399;
+}
+
+.action-button.update {
+  background: #dbeafe;
+  border-color: #60a5fa;
+}
+
+.action-button.end {
+  background: #ffe4e4;
+  border-color: #fb7185;
+}
+
+.btn-icon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.bottom-nav {
+  position: static;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: #60a5fa;
+}
+
+.nav-item img {
+  width: 40;
+  height: 30;
+}
+
+.nav-item.active {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
