@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Reset dasar ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-dark: #111111;
+  --frame-bg: #cde8ff;
+  --primary-dark: #02243f;
+  --button-border: #02243f;
+  --text-main: #02243f;
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* ===== Body / root layout ===== */
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* ===== Mobile frame ===== */
+.mobile-frame {
+  width: 320px;
+  max-width: 100%;
+  height: 620px;
+  max-height: 100vh;
+  background-color: var(--frame-bg);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 24px 32px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Logo section ===== */
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Badge (simulasi logo) */
+.logo-badge {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon inside badge */
+.logo-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  border: 4px solid var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-pill {
+  width: 60px;
+  height: 24px;
+  border-radius: 999px;
+  border: 3px solid var(--primary-dark);
+  transform: rotate(-20deg);
+}
+
+/* Star on top of badge */
+.logo-star {
+  position: absolute;
+  top: -22px;
+  font-size: 24px;
+  color: var(--primary-dark);
+}
+
+/* Title text */
+.app-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--primary-dark);
+}
+
+/* ===== Start button ===== */
+.start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 260px;
+  padding: 12px 0;
+  border-radius: 999px;
+  border: 2px solid var(--button-border);
+  background-color: transparent;
+  color: var(--primary-dark);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.start-button:hover {
+  background-color: var(--primary-dark);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.start-button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* ===== Responsif kecil ===== */
+@media (max-height: 640px) {
+  .mobile-frame {
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* ==== Login page layout ==== */
+.login-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.login-header-logo img {
+  display: block;
+}
+
+/* Judul login */
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--primary-dark);
+}
+
+/* Container isi login (tengah) */
+.login-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* ==== Social buttons ==== */
+.social-button {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--button-border);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.social-button:hover {
+  background-color: rgba(2, 36, 63, 0.06);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
+}
+
+.social-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 2px solid var(--button-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* ==== Divider OR ==== */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--primary-dark);
+}
+
+.divider-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+/* ==== Inputs ==== */
+.text-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--button-border);
+  background: transparent;
+  font-size: 14px;
+  outline: none;
+}
+
+.text-input::placeholder {
+  color: rgba(2, 36, 63, 0.6);
+}
+
+/* ==== Primary button ==== */
+.primary-button {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--button-border);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.primary-button:hover {
+  background-color: var(--primary-dark);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ==== Link kecil (Forgot Password) ==== */
+.link-text {
+  margin-top: 4px;
+  border: none;
+  background: none;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: underline;
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+/* ==== Back button (bawah frame) ==== */
+.back-button {
+  width: 80%;
+  max-width: 260px;
+  padding: 10px 0;
+  border-radius: 999px;
+  border: 2px solid var(--button-border);
+  background: transparent;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 12px;
+  text-decoration: none;
+  color: var(--primary-dark);
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(2, 36, 63, 0.06);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Teks kecil di bawah tombol Continue (Sign up) */
+.small-link {
+  margin-top: 4px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--primary-dark);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.small-link:hover {
+  text-decoration: underline;
+}
