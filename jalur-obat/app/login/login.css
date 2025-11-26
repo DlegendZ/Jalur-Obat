@@ -1,0 +1,143 @@
+/* Full-screen dark background */
+.login-root {
+  width: 100vw;
+  height: 100vh;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Phone Frame (9:16 ratio) */
+.login-phone {
+  width: 325px;          /* similar to screenshot */
+  height: 659px;         /* similar to screenshot */
+  background-color: #cbe9ff;
+  border-radius: 10px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap : 16;
+  position: relative;
+}
+
+/* Top-right small logo */
+.login-top-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+
+.login-title {
+  margin-top: 40px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #03254c;
+  text-align: center;
+}
+
+/* Social login buttons */
+.login-icon-img {
+  width: 20px;
+  height: 20px;
+}
+
+
+.login-social {
+  width: 90%;
+  padding: 12px 0;
+  border-radius: 999px;
+  background: #cbe9ff;
+  border: 1.5px solid #03254c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-icon {
+  font-size: 18px;
+}
+
+/* Divider */
+.login-divider {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.login-divider span {
+  flex: 1;
+  height: 1px;
+  background: #03254c;
+}
+
+/* Text inputs */
+.login-input {
+  width: 90%;
+  padding: 12px;
+  border-radius: 999px;
+  border: 1.5px solid #03254c;
+  background: #cbe9ff;
+  font-size: 14px;
+}
+
+/* Continue button */
+.login-continue {
+  width: 90%;
+  padding: 12px 0;
+  border-radius: 999px;
+  border: 1.5px solid #03254c;
+  background: transparent;
+  color: #03254c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.login-forgot {
+  font-size: 13px;
+  margin-top: -4px;
+  color: #03254c;
+}
+
+/* Back button */
+.login-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  text-decoration: none;
+  width: 90%;
+  padding: 12px 0;
+  border-radius: 999px;
+  border: 1.5px solid #03254c;
+  background: transparent;
+  color: #03254c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.login-continue:hover,
+.login-back:hover {
+  background-color: #03254c;
+  color: #ffffff;
+}
+
+.login-continue:active,
+.login-back:active {
+  transform: scale(0.97);
+}
+

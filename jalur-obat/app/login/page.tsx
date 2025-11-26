@@ -1,76 +1,72 @@
-// app/login/page.tsx
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import "./login.css";
 
 export default function LoginPage() {
   return (
-    <main className="app-root">
-      <div className="mobile-frame">
-        {/* Logo kecil di kanan atas */}
-        <div className="login-header">
-          <div />
-          <div className="login-header-logo">
-            <Image
-              src="/app_logo.png"
-              alt="Jalur Obat Logo"
-              width={40}
-              height={40}
-            />
-          </div>
+    <main className="login-root">
+      <div className="login-phone">
+
+        {/* Top right logo */}
+        <div className="login-top-logo">
+          <Image 
+            src="/app_logo.png" 
+            alt="logo" 
+            width={50} 
+            height={50} 
+          />
         </div>
 
-        {/* Isi utama */}
-        <div className="login-content">
-          <h1 className="page-title">Login to your account</h1>
+        <h1 className="login-title">Login to your account</h1>
 
-          {/* Social buttons */}
-          <button className="social-button">
-            <span className="social-icon">G</span>
-            <span>Continue with Google</span>
+        {/* Social Buttons */}
+          <button className="login-social">
+            <img src="/google.svg" className="login-icon-img" />
+              Continue with Google
           </button>
 
-          <button className="social-button">
-            <span className="social-icon"></span>
-            <span>Continue with Apple</span>
+          <button className="login-social">
+            <img src="/apple.svg" className="login-icon-img" />
+              Continue with Apple
           </button>
 
-          <button className="social-button">
-            <span className="social-icon">f</span>
-            <span>Continue with Facebook</span>
+          <button className="login-social">
+            <img src="/facebook.svg" className="login-icon-img" />
+            Continue with Facebook
           </button>
 
-          {/* Divider OR */}
-          <div className="divider">
-            <span className="divider-line" />
-            <span className="divider-text">OR</span>
-            <span className="divider-line" />
-          </div>
 
-          {/* Inputs */}
-          <input
-            type="email"
-            placeholder="Enter your Email Address"
-            className="text-input"
-          />
-          <input
-            type="password"
-            placeholder="Enter your Password"
-            className="text-input"
-          />
-
-          {/* Continue button */}
-          <button className="primary-button">Continue</button>
-
-          {/* Forgot password */}
-          <button className="link-text" type="button">
-            Forgot Password?
-          </button>
+        {/* Divider */}
+        <div className="login-divider">
+          <span></span>
+          OR
+          <span></span>
         </div>
 
-        {/* Back button di bawah */}
-        <Link href="/" className="back-button">
+        {/* Form Fields */}
+        <input 
+          type="email" 
+          placeholder="Enter your Email Address" 
+          className="login-input"
+        />
+
+        <input 
+          type="password" 
+          placeholder="Enter your Password"
+          className="login-input"
+        />
+
+        <button className="login-continue">Continue</button>
+
+        <p className="login-forgot">Forgot Password?</p>
+
+        {/* Back Button */}
+        <Link href="/" className="login-back">
           Back
         </Link>
+
       </div>
     </main>
   );

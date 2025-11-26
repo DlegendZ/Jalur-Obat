@@ -1,76 +1,72 @@
-// app/signup/page.tsx
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import "./signup.css";
 
-export default function SignupPage() {
+export default function SignUpPage() {
   return (
-    <main className="app-root">
-      <div className="mobile-frame">
-        {/* Logo kanan atas */}
-        <div className="login-header">
-          <div />
-          <div className="login-header-logo">
-            <Image
-              src="/app_logo.png"
-              alt="Jalur Obat Logo"
-              width={40}
-              height={40}
-            />
-          </div>
+    <main className="signup-root">
+      <div className="signup-phone">
+
+        {/* Top right logo */}
+        <div className="signup-top-logo">
+          <Image 
+            src="/app_logo.png" 
+            alt="logo" 
+            width={50} 
+            height={50} 
+          />
         </div>
 
-        {/* Isi utama */}
-        <div className="login-content">
-          <h1 className="page-title">Create to your account</h1>
+        <h1 className="signup-title">Create your account</h1>
 
-          {/* Social buttons */}
-          <button className="social-button">
-            <span className="social-icon">G</span>
-            <span>Continue with Google</span>
+        {/* Social Buttons */}
+          <button className="signup-social">
+            <img src="/google.svg" className="signup-icon-img" />
+              Continue with Google
           </button>
 
-          <button className="social-button">
-            <span className="social-icon"></span>
-            <span>Continue with Apple</span>
+          <button className="signup-social">
+            <img src="/apple.svg" className="signup-icon-img" />
+              Continue with Apple
           </button>
 
-          <button className="social-button">
-            <span className="social-icon">f</span>
-            <span>Continue with Facebook</span>
+          <button className="signup-social">
+            <img src="/facebook.svg" className="signup-icon-img" />
+            Continue with Facebook
           </button>
 
-          {/* Divider OR */}
-          <div className="divider">
-            <span className="divider-line" />
-            <span className="divider-text">OR</span>
-            <span className="divider-line" />
-          </div>
 
-          {/* Inputs */}
-          <input
-            type="email"
-            placeholder="Enter your Email Address"
-            className="text-input"
-          />
-          <input
-            type="password"
-            placeholder="Create Password"
-            className="text-input"
-          />
-
-          {/* Continue button */}
-          <button className="primary-button">Continue</button>
-
-          {/* Link ke login */}
-          <Link href="/login" className="small-link">
-            Already have an account?
-          </Link>
+        {/* Divider */}
+        <div className="signup-divider">
+          <span></span>
+          OR
+          <span></span>
         </div>
 
-        {/* Back ke home */}
-        <Link href="/" className="back-button">
+        {/* Form Fields */}
+        <input 
+          type="email" 
+          placeholder="Enter your Email Address" 
+          className="signup-input"
+        />
+
+        <input 
+          type="password" 
+          placeholder="Enter your Password"
+          className="signup-input"
+        />
+
+        <button className="signup-continue">Continue</button>
+
+        <Link href="/login" className="signup-haveacc">Already have an account?</Link>
+
+        {/* Back Button */}
+        <Link href="/" className="signup-back">
           Back
         </Link>
+
       </div>
     </main>
   );

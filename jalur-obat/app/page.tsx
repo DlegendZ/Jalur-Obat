@@ -1,28 +1,30 @@
-// app/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="app-root">
-      <div className="mobile-frame">
-        <div className="logo-section">
-          <Image
-            src="/app_logo.png"   // gunakan logo kamu di /public
-            alt="Logo Jalur Obat"
-            width={500}
-            height={500}
-            className="logo-image"
-            priority
-          />
+    <main className="jo-root">
+      {/* Outer dark background */}
+      <div className="jo-wrapper">
+        {/* Small title on the top-left */}
 
-          
+        {/* Phone frame */}
+        <div className="jo-phone">
+          {/* Logo area */}
+          <div className="jo-logo-wrapper">
+            <Image
+              src="/app_logo.png" // <-- change file name if needed
+              alt="Jalur Obat Logo"
+              width={300}
+              height={300}
+              className="jo-logo-image"
+              priority
+            />
+          </div>
+
+          {/* Start button */}
+           <Link href="/sign_up" className="jo-start-button">Start</Link>
         </div>
-
-        {/* Start -> ke /login */}
-        <Link href="/sign_up" className="start-button">
-          Start
-        </Link>
       </div>
     </main>
   );
