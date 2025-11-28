@@ -93,6 +93,8 @@
 
 /* Continue button */
 .signup-continue {
+  text-align: center;
+  text-decoration: none;
   width: 90%;
   padding: 12px 0;
   border-radius: 999px;

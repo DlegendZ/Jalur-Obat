@@ -58,9 +58,9 @@ export default function SignUpPage() {
           className="signup-input"
         />
 
-        <Link href="/list_journey" className="signup-continue">Continue</Link>
+        <Link href="/update_journey" className="signup-continue">Continue</Link>
 
-        <p className="signup-haveacc">Already have an account?</p>
+        <Link href="/login" className="signup-haveacc">Already have an account?</Link>
 
         {/* Back Button */}
         <Link href="/" className="signup-back">

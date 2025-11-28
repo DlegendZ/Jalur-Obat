@@ -58,12 +58,12 @@ export default function LoginPage() {
           className="login-input"
         />
   
-        <button className="login-continue">Continue</button>
+        <Link href="/update_journey" className="login-continue">Continue</Link>
 
         <p className="login-forgot">Forgot Password?</p>
 
         {/* Back Button */}
-        <Link href="/" className="login-back">
+        <Link href="/sign_up" className="login-back">
           Back
         </Link>
 
