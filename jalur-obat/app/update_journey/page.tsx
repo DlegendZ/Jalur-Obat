@@ -25,6 +25,7 @@ export default function JourneyUpdatePage() {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const fileRefState = useRef<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [agree, setAgree] = useState(false);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -45,6 +46,34 @@ export default function JourneyUpdatePage() {
   }
 
   async function handleAction(action: "start" | "update" | "end") {
+    if (!agree) {
+      alert("Please confirm that you are responsible for this data.");
+      return;
+    }
+
+    const requiredFields: (keyof typeof form)[] = [
+      "officerId",
+      "serialNumber",
+      "medicineName",
+      "currentLocation",
+      "quantity",
+      "overallStatus",
+      "expeditionType",
+    ];
+
+    for (const field of requiredFields) {
+      if (!form[field] || form[field].trim() === "") {
+        alert("Please fill in all required fields.");
+        return;
+      }
+    }
+
+    // 🔒 Cek foto wajib ada
+    if (!fileRefState.current) {
+      alert("Please upload a photo.");
+      return;
+    }
+
     setLoading(true);
     try {
       // Kita kirim semua sebagai FormData supaya foto + field dikirim sekaligus
@@ -72,18 +101,16 @@ export default function JourneyUpdatePage() {
   }
 
   return (
-    <main className="app-root">
-      <div className="mobile-frame">
-        {/* header (logo kanan atas) */}
-        <div className="journey-header">
-          <div />
-          <div className="journey-header-logo">
-            <Image src="/app_logo.png" alt="logo" width={40} height={40} />
-          </div>
+    <div className="root">
+      <div className="phone">
+
+        <div className="headerRow">
+          <h1 className="title">Journey Update</h1>
+          <img src="/app_logo.png" className="logo" alt="logo" />
         </div>
 
         <div className="journey-content">
-          <h1 className="page-title">Journey Update</h1>
+          <h6>(*) = Required</h6>
 
           <label className="label">OfficerID (Read Only)</label>
           <input name="officerId" value={form.officerId} onChange={onChange} className="text-input" />
@@ -143,7 +170,7 @@ export default function JourneyUpdatePage() {
             />
 
             <div className="ai-detect-block">
-              <span className="ai-label">AI Detection :</span>
+              <span className="ai-label">AI Detection:</span>
               <span className="ai-safe">{aiDetection}</span>
             </div>
           </div>
@@ -151,30 +178,44 @@ export default function JourneyUpdatePage() {
           {preview && <img src={preview} alt="preview" className="preview-img" />}
 
           <label className="checkbox-wrap">
-            <input type="checkbox" className="hidden-checkbox" />
+            <input
+              type="checkbox"
+              className="hidden-checkbox"
+              checked={agree}
+              onChange={() => setAgree(!agree)}
+            />
             <span className="fake-checkbox"></span>
             <span className="checkbox-text">I’m responsible for this data*</span>
           </label>
 
-          <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-            <button type="button" onClick={() => handleAction("start")} className="action-button start" disabled={loading}>
-              <img src="/start.png" className="btn-icon" />
+          <div style={{ display: "flex", gap: 10, marginTop: 15 }}>
+            <button type="button" onClick={() => handleAction("start")} className="action-button start" disabled={loading || !agree}>
+              <img src="/start-journey.png" className="btn-icon" />
             </button>
-            <button type="button" onClick={() => handleAction("update")} className="action-button update" disabled={loading}>
-              <img src="/update.png" className="btn-icon" />
+            <button type="button" onClick={() => handleAction("update")} className="action-button update" disabled={loading || !agree}>
+              <img src="/update-journey.png" className="btn-icon" />
             </button>
-            <button type="button" onClick={() => handleAction("end")} className="action-button end" disabled={loading}>
-              <img src="/end.png" className="btn-icon" />
+            <button type="button" onClick={() => handleAction("end")} className="action-button end" disabled={loading || !agree}>
+              <img src="/end-journey.png" className="btn-icon" />
             </button>
           </div>
 
-          <nav className="bottom-nav">
-            <Link href="/journey-list" className="nav-item"><img src="/journey-list.png" /><span>Journey List</span></Link>
-          </nav>
         </div>
-
-        <Link href="/" className="back-button">Back</Link>
+        <div className="bottomNav">
+          <div className="navItem">
+            <a href="/update_journey" className="navLink">
+              <img src="/Update.png" className="navIcon" alt="Update" />
+              <span>Journey Update</span>
+            </a>
+          </div>
+          <div className="navItem activeNav">
+            <a href="/list_journey" className="navLink">
+              <img src="/List.png" className="navIcon" alt="List" />
+              <span>Journey List</span>
+            </a>
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
