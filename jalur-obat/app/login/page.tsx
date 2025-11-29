@@ -60,10 +60,10 @@ export default function LoginPage() {
   
         <Link href="/update_journey" className="login-continue">Continue</Link>
 
-        <p className="login-forgot">Forgot Password?</p>
+        <Link href="/sign_up" className="create-account">New to this app?</Link>
 
         {/* Back Button */}
-        <Link href="/sign_up" className="login-back">
+        <Link href="/" className="login-back">
           Back
         </Link>
 

@@ -122,13 +122,13 @@ export default function JourneyUpdatePage() {
           <input name="medicineName" value={form.medicineName} onChange={onChange} className="text-input" />
 
           <label className="label">Current Location*</label>
-          <input name="currentLocation" value={form.currentLocation} onChange={onChange} className="text-input" />
+          <textarea name="currentLocation" value={form.currentLocation} onChange={onChange} className="text-input" rows={3}/>
 
           <label className="label">Quantity*</label>
           <input name="quantity" value={form.quantity} onChange={onChange} className="text-input" />
 
           <label className="label">Additional</label>
-          <input name="additional" value={form.additional} onChange={onChange} className="text-input" />
+          <textarea name="additional" value={form.additional} onChange={onChange} className="text-input" rows={5}/>
 
           <label className="label">Temperature</label>
           <input name="temperature" value={form.temperature} onChange={onChange} className="text-input" />

@@ -107,10 +107,11 @@
     transform 0.1s ease;
 }
 
-.login-forgot {
+.create-account {
   font-size: 13px;
   margin-top: -4px;
   color: #03254c;
+  text-decoration: none;
 }
 
 /* Back button */

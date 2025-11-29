@@ -83,14 +83,30 @@ export default async function JourneyDetail({ params }: Props) {
   return (
     <div className={styles.root}>
       <div className={styles.phone}>
-        <Link href="/list_journey">
-          <button className={styles.backBtn}>←</button>
-        </Link>
 
         <div className={styles.headerRow}>
-          <h1 className={styles.title}>Journey Detail</h1>
+          <Link href="/list_journey">
+            <button className={styles.backBtn}><svg
+              className="backIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#03254c"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 14l-4-4 4-4" />
+              <path d="M5 10h10a4 4 0 1 1 0 8h-3" />
+            </svg></button>
+          </Link>
+          <div>
+            <h1 className={styles.title}>Journey Detail</h1>
+            <h2 className={styles.subtitle}>{data.name} - {data.id}</h2>
+          </div>
           <img src="/app_logo.png" className={styles.logo} alt="logo" />
-          <h2 className={styles.subtitle}>{data.name} - {data.id}</h2>
         </div>
 
         {/* render semua stages */}
