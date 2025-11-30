@@ -204,10 +204,26 @@ select.text-input {
   font-weight: 600;
 }
 
-.ai-safe {
-  font-weight: 800;
-  color: #22c55e;
+.ai-detect-text {
+  font-weight: 700;
+  transition: color 0.2s ease;
   margin-left: 3px;
+}
+
+.ai-detect-text.safe {
+  color: #2ecc71;
+}
+
+.ai-detect-text.need-attention {
+  color: #f39c12;
+}
+
+.ai-detect-text.bad {
+  color: #e74c3c;
+}
+
+.ai-detect-text.detecting {
+  color: #0f1724;
 }
 
 .hidden-checkbox {
