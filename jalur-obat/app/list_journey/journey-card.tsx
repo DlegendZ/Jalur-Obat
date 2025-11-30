@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import styles from "./JourneyList.module.css";
+import { useRouter } from "next/navigation";
 
-export default function JourneyCard({ data, isExpanded, onClick }: { 
-  data: any; 
+export default function JourneyCard({ data, isExpanded, onClick }: {
+  data: any;
   isExpanded: boolean;
   onClick: () => void;
 }) {
@@ -20,6 +21,13 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
   };
 
   const currentStage = data.stages[data.stages.length - 1]; // Last stage
+
+  const router = useRouter();
+
+  const handleDetailClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    router.push(`/journey_detail/${encodeURIComponent(data.id)}`);
+  };
 
   return (
     <div className={`${styles.card} ${isExpanded ? styles.expanded : ''}`} onClick={onClick}>
@@ -78,6 +86,9 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
         <div className={styles.currentCondition}>
           <span className={styles.currentConditionLabel}>Current Condition:</span>
           <span className={styles.currentConditionValue}>{stageDetails[currentStage as keyof typeof stageDetails]?.quality}</span>
+          <button className={styles.detailButton} onClick={(e) => { e.stopPropagation(); handleDetailClick(e); }}>
+            Detail
+          </button>
         </div>
       )}
     </div>

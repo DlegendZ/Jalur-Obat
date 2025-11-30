@@ -53,9 +53,9 @@ export default function LoginPage() {
           className="login-input"
         />
   
-        <button className="login-continue">Continue</button>
+        <Link href="/update_journey" className="login-continue">Continue</Link>
 
-        <p className="login-forgot">Forgot Password?</p>
+        <Link href="/sign_up" className="create-account">New to this app?</Link>
 
         <Link href="/" className="login-back">
           Back

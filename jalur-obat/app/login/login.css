@@ -85,6 +85,8 @@
 }
 
 .login-continue {
+  text-align: center;
+  text-decoration: none;
   width: 90%;
   padding: 12px 0;
   border-radius: 999px;
@@ -97,10 +99,11 @@
     transform 0.1s ease;
 }
 
-.login-forgot {
+.create-account {
   font-size: 13px;
   margin-top: -4px;
   color: #03254c;
+  text-decoration: none;
 }
 
 .login-back {

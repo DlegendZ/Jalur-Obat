@@ -70,7 +70,8 @@
   flex: 1;
 }
 
-.filterBtn, .sortBtn {
+.filterBtn,
+.sortBtn {
   width: 100%;
   background: #ffffff;
   border: 2px solid #a0c8e8;
@@ -83,7 +84,8 @@
   transition: all 0.2s;
 }
 
-.filterBtn:hover, .sortBtn:hover {
+.filterBtn:hover,
+.sortBtn:hover {
   border-color: #03254c;
   background: #f0f8ff;
 }
@@ -235,6 +237,10 @@
   flex-direction: column;
   gap: 20px;
   margin-left: 8px;
+<<<<<<< HEAD
+=======
+  /* DIUBAH: Dikiri sedikit lagi */
+>>>>>>> efd7c82ee97a170f3562ee1388b4f801ed626e08
   position: relative;
 }
 
@@ -345,8 +351,8 @@
   padding: 12px;
   background: #f0f8ff;
   border-radius: 8px;
-  border: 1px solid #a0c8e8;
   text-align: center;
+  box-shadow: none;
 }
 
 .currentConditionLabel {
@@ -369,6 +375,10 @@
   justify-content: space-between;
   border-top: 2px solid #B8D8F0;
   margin: 8px -16px 0 -16px;
+<<<<<<< HEAD
+=======
+  /* MARGIN TOP 8px UNTUK TURUNKAN */
+>>>>>>> efd7c82ee97a170f3562ee1388b4f801ed626e08
   width: calc(100% + 32px);
   gap: 0;
   border-radius: 0;
@@ -432,4 +442,24 @@
 
 .cardList::-webkit-scrollbar-thumb:hover {
   background: #03254c;
+}
+
+.detailButton {
+  width: 90%;
+  display: block;
+  margin: 18px auto 0;
+  padding: 8px 0;
+  border-radius: 999px;
+  border: 2px solid #0A2347;
+  background: transparent;
+  color: #0A2347;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.detailButton:hover {
+  background: #0A2347;
+  color: white;
 }

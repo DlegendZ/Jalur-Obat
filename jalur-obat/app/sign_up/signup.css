@@ -86,10 +86,15 @@
 }
 
 .signup-continue {
+<<<<<<< HEAD
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
+=======
+  text-align: center;
+  text-decoration: none;
+>>>>>>> efd7c82ee97a170f3562ee1388b4f801ed626e08
   width: 90%;
   padding: 12px 0;
   border-radius: 999px;
