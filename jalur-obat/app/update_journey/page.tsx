@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import BottomNav from "../components/bottomNav";
 import "./journey-update.css";
 
 export default function JourneyUpdatePage() {
@@ -234,22 +235,8 @@ export default function JourneyUpdatePage() {
               <img src="/end-journey.png" className="btn-icon" />
             </button>
           </div>
-
         </div>
-        <div className="bottomNav">
-          <div className="navItem">
-            <a href="/update_journey" className="navLink">
-              <img src="/Update.png" className="navIcon" alt="Update" />
-              <span>Journey Update</span>
-            </a>
-          </div>
-          <div className="navItem activeNav">
-            <a href="/list_journey" className="navLink">
-              <img src="/List.png" className="navIcon" alt="List" />
-              <span>Journey List</span>
-            </a>
-          </div>
-        </div>
+        <BottomNav />
       </div>
     </div>
   );

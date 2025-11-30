@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import JourneyCard from "./journey-card";
 import styles from "./JourneyList.module.css";
+import BottomNav from "../components/bottomNav";
 
 const dummyData = [
   {
@@ -40,7 +41,7 @@ export default function JourneyListPage() {
     )
     .sort((a, b) => {
       if (sortType === "score") return b.score - a.score;
-      if (sortType === "updated") 
+      if (sortType === "updated")
         return parseDate(b.updated).getTime() - parseDate(a.updated).getTime();
       return 0;
     });
@@ -58,15 +59,15 @@ export default function JourneyListPage() {
         </div>
 
         <div className={styles.searchFilterRow}>
-          <input 
-            className={styles.search} 
+          <input
+            className={styles.search}
             placeholder="Search by ID / Name"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
           <div className={styles.filterButtons}>
             <div className={styles.filterGroup}>
-              <button 
+              <button
                 className={styles.filterBtn}
                 onClick={() => setFilterOpen(!filterOpen)}
               >
@@ -82,7 +83,7 @@ export default function JourneyListPage() {
             </div>
 
             <div className={styles.filterGroup}>
-              <button 
+              <button
                 className={styles.sortBtn}
                 onClick={() => setSortOpen(!sortOpen)}
               >
@@ -90,19 +91,19 @@ export default function JourneyListPage() {
               </button>
               {sortOpen && (
                 <div className={styles.dropdown}>
-                  <div 
+                  <div
                     className={styles.option}
                     onClick={() => setSortType("score")}
                   >
                     AI Score
                   </div>
-                  <div 
+                  <div
                     className={styles.option}
                     onClick={() => setSortType("updated")}
                   >
                     Last Updated
                   </div>
-                  <div 
+                  <div
                     className={styles.option}
                     onClick={() => setSortType("none")}
                   >
@@ -117,9 +118,9 @@ export default function JourneyListPage() {
         {/* CARD LIST */}
         <div className={styles.cardList}>
           {filteredData.map((item, idx) => (
-            <JourneyCard 
-              key={idx} 
-              data={item} 
+            <JourneyCard
+              key={idx}
+              data={item}
               isExpanded={selectedCard === idx}
               onClick={() => handleCardClick(idx)}
             />
@@ -127,20 +128,7 @@ export default function JourneyListPage() {
         </div>
 
         {/* BOTTOM NAV */}
-        <div className={styles.bottomNav}>
-          <div className={styles.navItem}>
-            <a href="/update_journey" className={styles.navLink}>
-              <img src="/Update.png" className={styles.navIcon} alt="Update" />
-              <span>Journey Update</span>
-            </a>
-          </div>
-          <div className={`${styles.navItem} ${styles.activeNav}`}>
-            <a href="/list_journey" className={styles.navLink}>
-              <img src="/List.png" className={styles.navIcon} alt="List" />
-              <span>Journey List</span>
-            </a>
-          </div>
-        </div>
+        <BottomNav />
       </div>
     </div>
   );
