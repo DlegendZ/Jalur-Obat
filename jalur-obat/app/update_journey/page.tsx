@@ -50,10 +50,6 @@ export default function JourneyUpdatePage() {
     if (preview) URL.revokeObjectURL(preview);
 
     fileRefState.current = f;
-<<<<<<< HEAD
-    setPreview(URL.createObjectURL(f));
-    setAiDetection("Safe");
-=======
     const url = URL.createObjectURL(f);
     setPreview(url);
 
@@ -84,7 +80,6 @@ export default function JourneyUpdatePage() {
     } finally {
       setDetecting(false);
     }
->>>>>>> efd7c82ee97a170f3562ee1388b4f801ed626e08
   }
 
   async function handleAction(action: "start" | "update" | "end") {
@@ -141,22 +136,12 @@ export default function JourneyUpdatePage() {
   }
 
   return (
-<<<<<<< HEAD
-    <main className="app-root">
-      <div className="mobile-frame">
-        <div className="journey-header">
-          <div />
-          <div className="journey-header-logo">
-            <Image src="/app_logo.png" alt="logo" width={40} height={40} />
-          </div>
-=======
     <div className="root">
       <div className="phone">
 
         <div className="headerRow">
           <h1 className="title">Journey Update</h1>
           <img src="/app_logo.png" className="logo" alt="logo" />
->>>>>>> efd7c82ee97a170f3562ee1388b4f801ed626e08
         </div>
 
         <div className="journey-content">
