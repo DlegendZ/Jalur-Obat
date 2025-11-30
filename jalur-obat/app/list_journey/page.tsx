@@ -52,13 +52,11 @@ export default function JourneyListPage() {
   return (
     <div className={styles.root}>
       <div className={styles.phone}>
-        {/* HEADER */}
         <div className={styles.headerRow}>
           <h1 className={styles.title}>Journey List</h1>
           <img src="/app_logo.png" className={styles.logo} alt="logo" />
         </div>
 
-        {/* SEARCH & FILTER SECTION */}
         <div className={styles.searchFilterRow}>
           <input 
             className={styles.search} 

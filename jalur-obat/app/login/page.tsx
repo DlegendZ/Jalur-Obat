@@ -9,7 +9,6 @@ export default function LoginPage() {
     <main className="login-root">
       <div className="login-phone">
 
-        {/* Top right logo */}
         <div className="login-top-logo">
           <Image 
             src="/app_logo.png" 
@@ -21,7 +20,6 @@ export default function LoginPage() {
 
         <h1 className="login-title">Login to your account</h1>
 
-        {/* Social Buttons */}
           <button className="login-social">
             <img src="/google.svg" className="login-icon-img" />
               Continue with Google
@@ -37,15 +35,12 @@ export default function LoginPage() {
             Continue with Facebook
           </button>
 
-
-        {/* Divider */}
         <div className="login-divider">
           <span></span>
           OR
           <span></span>
         </div>
 
-        {/* Form Fields */}
         <input 
           type="email" 
           placeholder="Enter your Email Address" 
@@ -62,7 +57,6 @@ export default function LoginPage() {
 
         <p className="login-forgot">Forgot Password?</p>
 
-        {/* Back Button */}
         <Link href="/" className="login-back">
           Back
         </Link>

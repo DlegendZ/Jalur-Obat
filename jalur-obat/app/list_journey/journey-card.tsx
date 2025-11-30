@@ -7,7 +7,6 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
   isExpanded: boolean;
   onClick: () => void;
 }) {
-  // Sample data for expanded view
   const stageDetails = {
     "A": { quantity: "1000 pcs", quality: "Excellent" },
     "B": { quantity: "980 pcs", quality: "Excellent" },
@@ -24,7 +23,6 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
 
   return (
     <div className={`${styles.card} ${isExpanded ? styles.expanded : ''}`} onClick={onClick}>
-      {/* HEADER - Nama dan ID sejajar dan bold */}
       <div className={styles.cardHeader}>
         <div className={styles.nameIdRow}>
           <span className={styles.drugName}>{data.name} -</span>
@@ -32,10 +30,8 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
         </div>
       </div>
 
-      {/* DOT LINE - Horizontal atau Vertikal */}
       <div className={`${styles.dotLineContainer} ${isExpanded ? styles.vertical : styles.horizontal}`}>
         {isExpanded ? (
-          // VERTICAL LAYOUT (Expanded)
           <div className={styles.verticalStages}>
             <div className={styles.verticalLine}></div>
             {data.stages.map((stage: string, index: number) => (
@@ -50,7 +46,6 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
             ))}
           </div>
         ) : (
-          // HORIZONTAL LAYOUT (Collapsed)
           <>
             <div className={styles.connectingLine}></div>
             <div className={styles.dotLine}>
@@ -65,12 +60,10 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
         )}
       </div>
 
-      {/* AI SCORE */}
       <div className={styles.aiScoreRow}>
         <span className={styles.aiScore}>AI Score : {data.score}%</span>
       </div>
 
-      {/* STATUS AND UPDATE INFO */}
       <div className={styles.statusUpdateRow}>
         <div className={styles.statusLeft}>
           <span className={styles.onGoing}>On Going</span>
@@ -81,7 +74,6 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
         </div>
       </div>
 
-      {/* CURRENT CONDITION */}
       {isExpanded && (
         <div className={styles.currentCondition}>
           <span className={styles.currentConditionLabel}>Current Condition:</span>

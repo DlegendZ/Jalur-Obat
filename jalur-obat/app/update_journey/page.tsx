@@ -1,4 +1,3 @@
-// app/journey-update/page.tsx
 "use client";
 
 import Image from "next/image";
@@ -40,14 +39,12 @@ export default function JourneyUpdatePage() {
     if (!f) return;
     fileRefState.current = f;
     setPreview(URL.createObjectURL(f));
-    // contoh: setAiDetection berdasarkan file (mock)
     setAiDetection("Safe");
   }
 
   async function handleAction(action: "start" | "update" | "end") {
     setLoading(true);
     try {
-      // Kita kirim semua sebagai FormData supaya foto + field dikirim sekaligus
       const fd = new FormData();
       fd.append("action", action);
       Object.entries(form).forEach(([k, v]: any) => fd.append(k, v ?? ""));
@@ -61,7 +58,6 @@ export default function JourneyUpdatePage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data?.message || "API Error");
 
-      // behaviour: kalau END -> ke Journey List
       if (action === "end") router.push("/journey-list");
       else alert(`${action.toUpperCase()} success!`);
     } catch (err: any) {
@@ -74,7 +70,6 @@ export default function JourneyUpdatePage() {
   return (
     <main className="app-root">
       <div className="mobile-frame">
-        {/* header (logo kanan atas) */}
         <div className="journey-header">
           <div />
           <div className="journey-header-logo">
