@@ -1,0 +1,214 @@
+/* ---------- Container & frame (phone) ---------- */
+.root {
+    width: 100vw;
+    height: 100vh;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.phone {
+    width: 325px;
+    max-height: 659px;
+    background-color: #cbe9ff;
+    border-radius: 10px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.phone::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.phone {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* ---------- Header (small & compact) ---------- */
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* tombol back */
+.backBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.backBtn {
+    transition:
+        transform 0.20s ease,
+        box-shadow 0.20s ease,
+        border-color 0.20s ease;
+}
+
+.backBtn:hover {
+    transform: translateY(-1px);
+    /* naik 4px */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    border-color: #03254c44;
+    /* outline halus navy */
+}
+
+.headerCenter {
+    display: flex;
+    flex-direction: column;
+    /* <— bikin 2 baris */
+    align-items: center;
+    /* center secara horizontal */
+    justify-content: center;
+    flex: 1;
+    /* supaya benar2 di tengah */
+    gap: 4px;
+}
+
+.title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #03254c;
+    line-height: 1.25;
+}
+
+.subtitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: #03254c;
+    line-height: 1.30;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+    /* <- bebas mau berapa */
+}
+
+.logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+/* ---------- Global container inside card area ---------- */
+.journey-content {
+    display: block;
+    width: 100%;
+}
+
+/* ---------- Card style per location (compact list style) ---------- */
+.card {
+    background: #e3f0fb;
+    /* warna card */
+    padding: 14px 16px;
+    /* ruang dalam */
+    border-radius: 12px;
+    /* rounded */
+    margin-bottom: 18px;
+    /* jarak antar card */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+}
+
+.card {
+    transition:
+        transform 0.20s ease,
+        box-shadow 0.20s ease,
+        border-color 0.20s ease;
+}
+
+.card:hover {
+    transform: translateY(-1px);
+    /* naik 4px */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    border-color: #03254c44;
+    /* outline halus navy */
+}
+
+/* Location + time */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #03254c;
+}
+
+/* tanggal/waktu */
+.time {
+    font-size: 11px;
+    font-weight: 500;
+    color: #03254c;
+}
+
+/* Field teks biasa */
+.field {
+    font-size: 12px;
+    color: #03254c;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+/* Image container */
+.imagePlaceholder {
+    margin-top: 10px;
+    width: 110px;
+    height: 110px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagePlaceholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logoBottom {
+    width: 70px;
+    height: 70px;
+    margin: 100px auto 0 auto;
+    display: block;
+}
+
+/* Small responsive tweak for long words */
+.entry,
+.phone {
+    word-wrap: break-word;
+}
+
+/* scroll style minimal */
+.phone::-webkit-scrollbar {
+    width: 8px;
+}
+
+.phone::-webkit-scrollbar-thumb {
+    background: rgba(3, 37, 76, 0.12);
+    border-radius: 6px;
+}

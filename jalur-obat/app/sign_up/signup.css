@@ -1,0 +1,140 @@
+.signup-root {
+  width: 100vw;
+  height: 100vh;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-phone {
+  width: 325px;    
+  height: 659px;
+  background-color: #cbe9ff;
+  border-radius: 10px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap : 16;
+  position: relative;
+}
+
+.signup-top-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+
+.signup-title {
+  margin-top: 40px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #03254c;
+  text-align: center;
+}
+
+.signup-icon-img {
+  width: 20px;
+  height: 20px;
+}
+
+
+.signup-social {
+  width: 90%;
+  padding: 12px 0;
+  border-radius: 999px;
+  background: #cbe9ff;
+  border: 1.5px solid #03254c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup-icon {
+  font-size: 18px;
+}
+
+.signup-divider {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.signup-divider span {
+  flex: 1;
+  height: 1px;
+  background: #03254c;
+}
+
+.signup-input {
+  width: 90%;
+  padding: 12px;
+  border-radius: 999px;
+  border: 1.5px solid #03254c;
+  background: #cbe9ff;
+  font-size: 14px;
+}
+
+.signup-continue {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  padding: 12px 0;
+  border-radius: 999px;
+  border: 1.5px solid #03254c;
+  background: transparent;
+  color: #03254c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.signup-haveacc {
+  text-decoration: none;
+  font-size: 13px;
+  margin-top: -4px;
+  color: #03254c;
+}
+
+.signup-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  text-decoration: none;
+  width: 90%;
+  padding: 12px 0;
+  border-radius: 999px;
+  border: 1.5px solid #03254c;
+  background: transparent;
+  color: #03254c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.signup-continue:hover,
+.signup-back:hover {
+  background-color: #03254c;
+  color: #ffffff;
+}
+
+.signup-continue:active,
+.signup-back:active {
+  transform: scale(0.97);
+}
+
