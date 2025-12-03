@@ -1,5 +1,6 @@
 "use client";
 
+import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
@@ -17,8 +18,9 @@ export default function JourneyUpdatePage() {
     quantity: "",
     additional: "",
     temperature: "",
-    overallStatus: "Prima",
-    expeditionType: "Darat",
+    humidity: "",
+    overallStatus: "excellent",
+    expeditionType: "Land",
   });
   const [preview, setPreview] = useState<string | null>(null);
   const [aiDetection, setAiDetection] = useState<string>("Safe"); // mock
@@ -36,6 +38,51 @@ export default function JourneyUpdatePage() {
   function triggerFile() {
     fileRef.current?.click();
   }
+
+  async function submitJourney() {
+  const body = {
+    officer_id: form.officerId,
+    serial_number: form.serialNumber,
+    medicine_name: form.medicineName,
+    current_location: form.currentLocation,
+    quantity: Number(form.quantity),
+    additional: form.additional || null,
+    temperature: Number(form.temperature),
+    humidity: Number(form.humidity),
+    overall_status: form.overallStatus,
+    expedition_type: form.expeditionType,
+  };
+
+  try {
+    const res = await fetch("http://localhost:5000/update_journey", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      alert("Error: Failed to save");
+    } else {
+      alert("Saved! Front End Connected to Backend! yay");
+      setForm({
+        officerId: "",
+        serialNumber: "",
+        medicineName: "",
+        currentLocation: "",
+        quantity: "",
+        additional: "",
+        temperature: "",
+        humidity: "",
+        overallStatus: "excellent",
+        expeditionType: "Land",
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Network error");
+  }
+}
+
 
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -97,6 +144,8 @@ export default function JourneyUpdatePage() {
       "quantity",
       "overallStatus",
       "expeditionType",
+      "temperature",
+      "humidity"
     ];
 
     for (const field of requiredFields) {
@@ -148,7 +197,7 @@ export default function JourneyUpdatePage() {
         <div className="journey-content">
           <h6>(*) = Required</h6>
 
-          <label className="label">OfficerID (Read Only)</label>
+          <label className="label">OfficerID*</label>
           <input name="officerId" value={form.officerId} onChange={onChange} className="text-input" />
 
           <label className="label">Serial Number*</label>
@@ -166,20 +215,23 @@ export default function JourneyUpdatePage() {
           <label className="label">Additional</label>
           <textarea name="additional" value={form.additional} onChange={onChange} className="text-input" rows={5} />
 
-          <label className="label">Temperature</label>
+          <label className="label">Temperature*</label>
           <input name="temperature" value={form.temperature} onChange={onChange} className="text-input" />
+
+          <label className="label">Humidity*</label>
+          <input name="humidity" value={form.humidity} onChange={onChange} className="text-input" />
 
           <label className="label">Overall Status*</label>
           <select name="overallStatus" value={form.overallStatus} onChange={onChange} className="text-input">
-            <option>Excellent</option>
-            <option>Good</option>
-            <option>Degraded / Deteriorating</option>
-            <option>Damaged</option>
-            <option>Suspicious Packaging</option>
+            <option value="excellent">Excellent</option>
+            <option value= "good">Good</option>
+            <option value= "degraded">Degraded / Deteriorating</option>
+            <option value= "suspicious packaging">Damaged</option>
+            <option value= "high temperature">Suspicious Packaging</option>
             <option>High Temperature</option>
           </select>
 
-          <label className="label">Expedition Type</label>
+          <label className="label">Expedition Type*</label>
           <select name="expeditionType" value={form.expeditionType} onChange={onChange} className="text-input">
             <option>Land</option>
             <option>Air</option>
@@ -225,13 +277,13 @@ export default function JourneyUpdatePage() {
           </label>
 
           <div style={{ display: "flex", gap: 10, marginTop: 15 }}>
-            <button type="button" onClick={() => handleAction("start")} className="action-button start" disabled={loading || !agree}>
+            <button type="button" onClick={submitJourney} className="action-button start" disabled={loading || !agree}>
               <img src="/start-journey.png" className="btn-icon" />
             </button>
-            <button type="button" onClick={() => handleAction("update")} className="action-button update" disabled={loading || !agree}>
+            <button type="button" onClick={submitJourney} className="action-button update" disabled={loading || !agree}>
               <img src="/update-journey.png" className="btn-icon" />
             </button>
-            <button type="button" onClick={() => handleAction("end")} className="action-button end" disabled={loading || !agree}>
+            <button type="button" onClick={submitJourney} className="action-button end" disabled={loading || !agree}>
               <img src="/end-journey.png" className="btn-icon" />
             </button>
           </div>
@@ -239,5 +291,5 @@ export default function JourneyUpdatePage() {
         <BottomNav />
       </div>
     </div>
-  );
+  ); 
 }
