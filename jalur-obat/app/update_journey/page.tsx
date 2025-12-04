@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import BottomNav from "../components/bottomNav";
 import "./journey-update.css";
+import JourneyCard from "../list_journey/journey-card";
 
 export default function JourneyUpdatePage() {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function JourneyUpdatePage() {
     fileRef.current?.click();
   }
 
-  async function submitJourney() {
+  async function submitJourney(status:string) {
   const body = {
     officer_id: form.officerId,
     serial_number: form.serialNumber,
@@ -51,6 +52,7 @@ export default function JourneyUpdatePage() {
     humidity: Number(form.humidity),
     overall_status: form.overallStatus,
     expedition_type: form.expeditionType,
+    journey_status: status
   };
 
   try {
@@ -63,7 +65,7 @@ export default function JourneyUpdatePage() {
     if (!res.ok) {
       alert("Error: Failed to save");
     } else {
-      alert("Saved! Front End Connected to Backend! yay");
+      alert(`Saved! Journey ${status} recorded.`);
       setForm({
         officerId: "",
         serialNumber: "",
@@ -130,60 +132,60 @@ export default function JourneyUpdatePage() {
     }
   }
 
-  async function handleAction(action: "start" | "update" | "end") {
-    if (!agree) {
-      alert("Please confirm that you are responsible for this data.");
-      return;
-    }
+  // async function handleAction(action: "start" | "update" | "end") {
+  //   if (!agree) {
+  //     alert("Please confirm that you are responsible for this data.");
+  //     return;
+  //   }
 
-    const requiredFields: (keyof typeof form)[] = [
-      "officerId",
-      "serialNumber",
-      "medicineName",
-      "currentLocation",
-      "quantity",
-      "overallStatus",
-      "expeditionType",
-      "temperature",
-      "humidity"
-    ];
+  //   const requiredFields: (keyof typeof form)[] = [
+  //     "officerId",
+  //     "serialNumber",
+  //     "medicineName",
+  //     "currentLocation",
+  //     "quantity",
+  //     "overallStatus",
+  //     "expeditionType",
+  //     "temperature",
+  //     "humidity"
+  //   ];
 
-    for (const field of requiredFields) {
-      if (!form[field] || form[field].trim() === "") {
-        alert("Please fill in all required fields.");
-        return;
-      }
-    }
+  //   for (const field of requiredFields) {
+  //     if (!form[field] || form[field].trim() === "") {
+  //       alert("Please fill in all required fields.");
+  //       return;
+  //     }
+  //   }
 
-    // 🔒 Cek foto wajib ada
-    if (!fileRefState.current) {
-      alert("Please upload a photo.");
-      return;
-    }
+  //   // 🔒 Cek foto wajib ada
+  //   if (!fileRefState.current) {
+  //     alert("Please upload a photo.");
+  //     return;
+  //   }
 
-    setLoading(true);
-    try {
-      const fd = new FormData();
-      fd.append("action", action);
-      Object.entries(form).forEach(([k, v]: any) => fd.append(k, v ?? ""));
-      if (fileRefState.current) fd.append("photo", fileRefState.current);
+  //   setLoading(true);
+  //   try {
+  //     const fd = new FormData();
+  //     fd.append("action", action);
+  //     Object.entries(form).forEach(([k, v]: any) => fd.append(k, v ?? ""));
+  //     if (fileRefState.current) fd.append("photo", fileRefState.current);
 
-      const res = await fetch("/api/journey", {
-        method: "POST",
-        body: fd,
-      });
+  //     const res = await fetch("/api/journey", {
+  //       method: "POST",
+  //       body: fd,
+  //     });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.message || "API Error");
+  //     const data = await res.json();
+  //     if (!res.ok) throw new Error(data?.message || "API Error");
 
-      if (action === "end") router.push("/journey-list");
-      else alert(`${action.toUpperCase()} success!`);
-    } catch (err: any) {
-      alert("Failed: " + (err?.message ?? "Unknown"));
-    } finally {
-      setLoading(false);
-    }
-  }
+  //     if (action === "end") router.push("/journey-list");
+  //     else alert(`${action.toUpperCase()} success!`);
+  //   } catch (err: any) {
+  //     alert("Failed: " + (err?.message ?? "Unknown"));
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   return (
     <div className="root">
@@ -277,13 +279,13 @@ export default function JourneyUpdatePage() {
           </label>
 
           <div style={{ display: "flex", gap: 10, marginTop: 15 }}>
-            <button type="button" onClick={submitJourney} className="action-button start" disabled={loading || !agree}>
+            <button type="button" onClick={() => submitJourney("start")} className="action-button start" disabled={loading || !agree}>
               <img src="/start-journey.png" className="btn-icon" />
             </button>
-            <button type="button" onClick={submitJourney} className="action-button update" disabled={loading || !agree}>
+            <button type="button" onClick={() => submitJourney("update")} className="action-button update" disabled={loading || !agree}>
               <img src="/update-journey.png" className="btn-icon" />
             </button>
-            <button type="button" onClick={submitJourney} className="action-button end" disabled={loading || !agree}>
+            <button type="button" onClick={() => submitJourney("end")} className="action-button end" disabled={loading || !agree}>
               <img src="/end-journey.png" className="btn-icon" />
             </button>
           </div>

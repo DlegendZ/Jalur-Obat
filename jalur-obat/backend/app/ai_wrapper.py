@@ -1,7 +1,7 @@
 import base64
 import requests
 
-GOOGLE_API_KEY = ""
+GOOGLE_API_KEY = "AIzaSyDlaTEKQ9wgh_rJGozdiodbfp1rjSOOg_0"
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
     "gemini-2.0-flash-vision:generateContent?key=" + GOOGLE_API_KEY
