@@ -23,7 +23,7 @@ export default function JourneyUpdatePage() {
     expeditionType: "Land",
   });
   const [preview, setPreview] = useState<string | null>(null);
-  const [aiDetection, setAiDetection] = useState<string>("Safe"); // mock
+  const [aiDetection, setAiDetection] = useState<string>("(-)"); // mock
   const fileRef = useRef<HTMLInputElement | null>(null);
   const fileRefState = useRef<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ export default function JourneyUpdatePage() {
   };
 
   try {
-    const res = await fetch("http://localhost:5000/update_journey", {
+    const res = await fetch("http://localhost:8000/update_journey", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -84,6 +84,7 @@ export default function JourneyUpdatePage() {
 }
 
 
+  // --- handler upload + call FastAPI ---
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -107,9 +108,11 @@ export default function JourneyUpdatePage() {
 
     try {
       const fd = new FormData();
-      fd.append("photo", f);
+      // ⬇️ nama field HARUS "file" biar cocok sama FastAPI: file: UploadFile = File(...)
+      fd.append("file", f);
 
-      const res = await fetch("/api/ai-detect", {
+      // ⬇️ pukul langsung ke FastAPI kamu
+      const res = await fetch("http://127.0.0.1:8000/analyze-image-file", {
         method: "POST",
         body: fd,
       });
@@ -120,8 +123,8 @@ export default function JourneyUpdatePage() {
       }
 
       const json = await res.json();
-      // asumsi response: { label: "Safe" | "Need Attention" | "Bad", score: 0.XX }
-      setAiDetection(json.label ?? "Unknown");
+      // response: { filename: "tes.jpg", status: "Need Attention" }
+      setAiDetection(json.status ?? "Unknown");
     } catch (err: any) {
       console.error("AI detect error:", err);
       setAiDetection("Error");
@@ -129,6 +132,7 @@ export default function JourneyUpdatePage() {
       setDetecting(false);
     }
   }
+
 
   async function handleAction(action: "start" | "update" | "end") {
     if (!agree) {
@@ -223,12 +227,9 @@ export default function JourneyUpdatePage() {
 
           <label className="label">Overall Status*</label>
           <select name="overallStatus" value={form.overallStatus} onChange={onChange} className="text-input">
-            <option value="excellent">Excellent</option>
-            <option value= "good">Good</option>
-            <option value= "degraded">Degraded / Deteriorating</option>
-            <option value= "suspicious packaging">Damaged</option>
-            <option value= "high temperature">Suspicious Packaging</option>
-            <option>High Temperature</option>
+            <option value="Safe">Safe</option>
+            <option value= "Need Attention">Need Attention</option>
+            <option value= "Bad">Bad</option>
           </select>
 
           <label className="label">Expedition Type*</label>
@@ -241,27 +242,30 @@ export default function JourneyUpdatePage() {
           <label className="label">Upload Photo*</label>
 
           <div className="upload-wrapper">
-            <button
-              type="button"
-              className="upload-button"
-              onClick={() => fileRef.current?.click()}
-            >
-              Choose Photo
-            </button>
+  <button
+    type="button"
+    className="upload-button"
+    onClick={() => fileRef.current?.click()}
+  >
+    Choose Photo
+  </button>
 
-            <input
-              ref={fileRef}
-              type="file"
-              accept="image/*"
-              onChange={onFile}
-              className="hidden-file-input"
-            />
+  <input
+    ref={fileRef}
+    type="file"
+    accept="image/*"
+    onChange={onFile}
+    className="hidden-file-input"
+  />
 
-            <div className="ai-detect-block">
-              <span className="ai-label">AI Detection:</span>
-              <span className={`ai-detect-text ${aiDetection.replace(/\s+/g, "-").toLowerCase()}`}>{aiDetection}</span>
-            </div>
-          </div>
+  <div className="ai-detect-block">
+    <span className="ai-label">AI Detection:</span>
+    <span className={`ai-detect-text ${aiDetection.replace(/\s+/g, "-").toLowerCase()}`}>
+      {aiDetection}
+    </span>
+  </div>
+</div>
+
 
           {preview && <img src={preview} alt="preview" className="preview-img" />}
 

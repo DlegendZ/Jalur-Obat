@@ -1,7 +1,7 @@
 import base64
 import requests
 
-GOOGLE_API_KEY = ""
+GOOGLE_API_KEY = "AIzaSyDlaTEKQ9wgh_rJGozdiodbfp1rjSOOg_0"
 GEMINI_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
     "gemini-2.0-flash-vision:generateContent?key=" + GOOGLE_API_KEY
@@ -9,18 +9,29 @@ GEMINI_URL = (
 
 def analyze_image_with_ai(image_base64: str) -> str:
     prompt = """
-    You are an image classifier.
+Anda adalah **KLASIFIKATOR GAMBAR HUKUM DAN KESELAMATAN TINGKAT TERTINGGI**.
+Tujuan Anda adalah menghasilkan klasifikasi yang **OBJEKTIF** dan **TEGAS**.
 
-    Choose EXACTLY ONE label:
-    Safe
-    Need Attention
-    Bad
+Klasifikasikan gambar menjadi **HANYA SATU** dari label berikut:
+- **Safe**
+- **Need Attention**
+- **Bad**
 
-    Rules:
-    - No explanation.
-    - No extra words.
-    - Output exactly one label.
-    """
+### Definisi Kriteria & Aturan KETAT
+
+* **Safe**: Konten yang jelas normal, tidak berbahaya, dan diperbolehkan. Ini mencakup aktivitas komersial, objek sehari-hari, atau pemandangan umum. TIDAK ADA risiko yang terlihat atau signifikan.
+* **Bad**: Konten yang jelas berbahaya, ilegal, atau dilarang secara universal (Kekerasan eksplisit, konten seksual ilegal, Kebencian yang jelas).
+* **Need Attention**: **DILARANG** memilih ini kecuali gambar benar-benar kacau, rusak, atau ambigu secara visual sehingga TIDAK MUNGKIN ditentukan Safe atau Bad.
+
+### Aturan Tambahan Wajib
+
+1.  Output **HANYA** label tunggal (cth: Safe).
+2.  **JANGAN** membuat asumsi atau berimajinasi tentang apa yang tidak terlihat di dalam gambar (cth: jangan menebak isi kotak, jangan menebak apa yang terjadi di luar bingkai).
+3.  **JANGAN** bersikap terlalu hati-hati. Jika gambar 99% Safe, labelnya HARUS Safe.
+4.  **HANYA** gunakan Need Attention sebagai Pilihan Terakhir Mutlak jika tidak ada informasi visual yang memadai untuk keputusan Safe/Bad.
+
+Berikan klasifikasi yang TEGAS.
+"""
 
     payload = {
         "contents": [
