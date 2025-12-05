@@ -20,7 +20,7 @@ export default function JourneyUpdatePage() {
     additional: "",
     temperature: "",
     humidity: "",
-    overallStatus: "excellent",
+    overallStatus: "Safe",
     expeditionType: "Land",
   });
   const [preview, setPreview] = useState<string | null>(null);
@@ -56,7 +56,7 @@ export default function JourneyUpdatePage() {
   };
 
   try {
-    const res = await fetch("http://localhost:8000/update_journey", {
+    const res = await fetch("http://localhost:5000/update_journey", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -75,7 +75,7 @@ export default function JourneyUpdatePage() {
         additional: "",
         temperature: "",
         humidity: "",
-        overallStatus: "excellent",
+        overallStatus: "Safe",
         expeditionType: "Land",
       });
     }
@@ -84,8 +84,6 @@ export default function JourneyUpdatePage() {
     alert("Network error");
   }
 }
-
-
   // --- handler upload + call FastAPI ---
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
