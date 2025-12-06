@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* ===== Base reset (optional) ===== */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,9 +13,13 @@ body {
     sans-serif;
 }
 
+<<<<<<< HEAD
 /* ===== Jalur Obat Front Page ===== */
 
 /* Full-screen dark background */
+=======
+
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .jo-root {
   min-height: 100vh;
   display: flex;
@@ -21,15 +28,24 @@ body {
   background-color: #222222;
 }
 
+<<<<<<< HEAD
 /* Wrapper to hold title + phone */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .jo-wrapper {
   position: relative;
 }
 
+<<<<<<< HEAD
 /* Phone frame */
 .jo-phone {
   width: 325px;          /* similar to screenshot */
   height: 659px;         /* similar to screenshot */
+=======
+.jo-phone {
+  width: 325px;          
+  height: 659px;     
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
   background-color: #cbe9ff;
   border-radius: 10px;
   padding: 40px 24px;
@@ -39,20 +55,29 @@ body {
   justify-content: center;
 }
 
+<<<<<<< HEAD
 /* Logo + text column */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .jo-logo-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+<<<<<<< HEAD
 /* Logo image */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .jo-logo-image {
   max-width: 300px;
   height: auto;
 }
 
+<<<<<<< HEAD
 /* Start button */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .jo-start-button {
   display: flex;
   align-items: center;
@@ -71,7 +96,10 @@ body {
     transform 0.1s ease;
 }
 
+<<<<<<< HEAD
 /* Hover / active effect */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .jo-start-button:hover {
   background-color: #03254c;
   color: #ffffff;

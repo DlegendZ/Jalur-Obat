@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* FULL SCREEN ROOT */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .root {
   width: 100vw;
   height: 100vh;
@@ -8,7 +11,10 @@
   justify-content: center;
 }
 
+<<<<<<< HEAD
 /* PHONE FRAME */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .phone {
   width: 325px;
   height: 659px;
@@ -21,7 +27,10 @@
   overflow: hidden;
 }
 
+<<<<<<< HEAD
 /* HEADER */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .headerRow {
   display: flex;
   justify-content: space-between;
@@ -42,7 +51,10 @@
   border-radius: 6px;
 }
 
+<<<<<<< HEAD
 /* SEARCH & FILTER ROW */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .searchFilterRow {
   margin-bottom: 16px;
 }
@@ -125,7 +137,10 @@
   border-bottom: none;
 }
 
+<<<<<<< HEAD
 /* CARD LIST */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .cardList {
   flex: 1;
   overflow-y: auto;
@@ -135,7 +150,10 @@
   padding-bottom: 10px;
 }
 
+<<<<<<< HEAD
 /* CARD */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .card {
   background: white;
   border-radius: 12px;
@@ -159,7 +177,10 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+<<<<<<< HEAD
 /* CARD HEADER */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -186,7 +207,10 @@
   color: #03254c;
 }
 
+<<<<<<< HEAD
 /* DOT LINE CONTAINER - HORIZONTAL */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .dotLineContainer.horizontal {
   position: relative;
   margin: 16px 0;
@@ -235,7 +259,10 @@
   color: #03254c;
 }
 
+<<<<<<< HEAD
 /* DOT LINE CONTAINER - VERTICAL */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .dotLineContainer.vertical {
   margin: 16px 0;
   position: relative;
@@ -246,7 +273,10 @@
   flex-direction: column;
   gap: 20px;
   margin-left: 8px;
+<<<<<<< HEAD
   /* DIUBAH: Dikiri sedikit lagi */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
   position: relative;
 }
 
@@ -296,7 +326,10 @@
   color: #03254c;
 }
 
+<<<<<<< HEAD
 /* AI SCORE */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .aiScoreRow {
   margin: 12px 0;
   text-align: center;
@@ -308,7 +341,10 @@
   color: #03254c;
 }
 
+<<<<<<< HEAD
 /* STATUS AND UPDATE ROW */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .statusUpdateRow {
   display: flex;
   justify-content: space-between;
@@ -354,7 +390,10 @@
   border: 1px solid #48bb78;
 }
 
+<<<<<<< HEAD
 /* CURRENT CONDITION */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .currentCondition {
   margin-top: 16px;
   padding: 12px;
@@ -377,8 +416,11 @@
   color: #03254c;
 }
 
+<<<<<<< HEAD
 /* BOTTOM NAVIGATION */
 /* BOTTOM NAVIGATION - DIUBAH SESUAI GAMBAR 2 */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .bottomNav {
   background: #E0F0FF;
   padding: 0;
@@ -386,7 +428,10 @@
   justify-content: space-between;
   border-top: 2px solid #B8D8F0;
   margin: 8px -16px 0 -16px;
+<<<<<<< HEAD
   /* MARGIN TOP 8px UNTUK TURUNKAN */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
   width: calc(100% + 32px);
   gap: 0;
   border-radius: 0;
@@ -420,13 +465,19 @@
   height: 24px;
 }
 
+<<<<<<< HEAD
 /* Journey List - Aktif */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .activeNav .navLink {
   background: #5DAAFF;
   color: white;
 }
 
+<<<<<<< HEAD
 /* Hover effects */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .navLink:hover {
   background: #B8D8F0;
 }
@@ -436,7 +487,10 @@
   opacity: 0.9;
 }
 
+<<<<<<< HEAD
 /* SCROLLBAR STYLING */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .cardList::-webkit-scrollbar {
   width: 3px;
 }

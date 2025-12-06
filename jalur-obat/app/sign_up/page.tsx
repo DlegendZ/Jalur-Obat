@@ -9,7 +9,10 @@ export default function SignUpPage() {
     <main className="signup-root">
       <div className="signup-phone">
 
+<<<<<<< HEAD
         {/* Top right logo */}
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
         <div className="signup-top-logo">
           <Image 
             src="/app_logo.png" 
@@ -21,7 +24,10 @@ export default function SignUpPage() {
 
         <h1 className="signup-title">Create your account</h1>
 
+<<<<<<< HEAD
         {/* Social Buttons */}
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
           <button className="signup-social">
             <img src="/google.svg" className="signup-icon-img" />
               Continue with Google
@@ -37,15 +43,21 @@ export default function SignUpPage() {
             Continue with Facebook
           </button>
 
+<<<<<<< HEAD
 
         {/* Divider */}
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
         <div className="signup-divider">
           <span></span>
           OR
           <span></span>
         </div>
 
+<<<<<<< HEAD
         {/* Form Fields */}
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
         <input 
           type="email" 
           placeholder="Enter your Email Address" 
@@ -62,7 +74,10 @@ export default function SignUpPage() {
 
         <Link href="/login" className="signup-haveacc">Already have an account?</Link>
 
+<<<<<<< HEAD
         {/* Back Button */}
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
         <Link href="/" className="signup-back">
           Back
         </Link>

@@ -4,6 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="jo-root">
+<<<<<<< HEAD
       {/* Outer dark background */}
       <div className="jo-wrapper">
         {/* Small title on the top-left */}
@@ -14,6 +15,14 @@ export default function Home() {
           <div className="jo-logo-wrapper">
             <Image
               src="/app_logo.png" // <-- change file name if needed
+=======
+      <div className="jo-wrapper">
+
+        <div className="jo-phone">
+          <div className="jo-logo-wrapper">
+            <Image
+              src="/app_logo.png"
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
               alt="Jalur Obat Logo"
               width={300}
               height={300}
@@ -22,7 +31,10 @@ export default function Home() {
             />
           </div>
 
+<<<<<<< HEAD
           {/* Start button */}
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
            <Link href="/sign_up" className="jo-start-button">Start</Link>
         </div>
       </div>

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* Full-screen dark background */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .signup-root {
   width: 100vw;
   height: 100vh;
@@ -8,10 +11,16 @@
   justify-content: center;
 }
 
+<<<<<<< HEAD
 /* Phone Frame (9:16 ratio) */
 .signup-phone {
   width: 325px;          /* similar to screenshot */
   height: 659px;         /* similar to screenshot */
+=======
+.signup-phone {
+  width: 325px;    
+  height: 659px;
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
   background-color: #cbe9ff;
   border-radius: 10px;
   padding: 40px 24px;
@@ -23,7 +32,10 @@
   position: relative;
 }
 
+<<<<<<< HEAD
 /* Top-right small logo */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .signup-top-logo {
   position: absolute;
   top: 20px;
@@ -39,7 +51,10 @@
   text-align: center;
 }
 
+<<<<<<< HEAD
 /* Social signup buttons */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .signup-icon-img {
   width: 20px;
   height: 20px;
@@ -65,7 +80,10 @@
   font-size: 18px;
 }
 
+<<<<<<< HEAD
 /* Divider */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .signup-divider {
   width: 90%;
   display: flex;
@@ -81,7 +99,10 @@
   background: #03254c;
 }
 
+<<<<<<< HEAD
 /* Text inputs */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .signup-input {
   width: 90%;
   padding: 12px;
@@ -91,10 +112,18 @@
   font-size: 14px;
 }
 
+<<<<<<< HEAD
 /* Continue button */
 .signup-continue {
   text-align: center;
   text-decoration: none;
+=======
+.signup-continue {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
   width: 90%;
   padding: 12px 0;
   border-radius: 999px;
@@ -114,7 +143,10 @@
   color: #03254c;
 }
 
+<<<<<<< HEAD
 /* Back button */
+=======
+>>>>>>> 320160c0002f8485a754025abd1eb93c8d43c676
 .signup-back {
   display: flex;
   align-items: center;
