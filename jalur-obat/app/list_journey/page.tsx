@@ -1,27 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JourneyCard from "./journey-card";
 import styles from "./JourneyList.module.css";
 import BottomNav from "../components/bottomNav";
-
-const dummyData = [
-  {
-    name: "OBH KOMIK",
-    id: "84929927492",
-    score: 94,
-    updated: "22/2/2022",
-    stages: ["A", "B", "D", "E", "M", "F", "P", "Z"],
-    status: "Safe",
-  },
-  {
-    name: "EXTRA JOSS",
-    id: "12345678900",
-    score: 87,
-    updated: "21/2/2022",
-    stages: ["A", "B", "D", "E", "M", "F", "P"],
-    status: "Stable",
-  },
-];
 
 export default function JourneyListPage() {
   const [search, setSearch] = useState("");
@@ -30,12 +11,66 @@ export default function JourneyListPage() {
   const [sortOpen, setSortOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+
   function parseDate(str: string) {
     const [day, month, year] = str.split("/").map(Number);
     return new Date(year, month - 1, day);
   }
 
-  const filteredData = dummyData
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch(`${API_BASE}/list_journey`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+
+        const arr: any[] = [];
+
+        // json.results_history bentuknya: [ { "serial": [history...] }, ... ]
+        (json.results_history || []).forEach((obj: any) => {
+          const serial = Object.keys(obj)[0];
+          const history = obj[serial] as any[];
+
+          if (!history || history.length === 0) return;
+
+          const latest = history[history.length - 1];
+
+          arr.push({
+            name: latest.medicine_name || "Unknown",
+            id: serial,
+            score:
+              latest.ai_score_fake_result != null
+                ? Number(latest.ai_score_fake_result)
+                : 0,
+            // "YYYY-MM-DD HH:MM:SS" -> "DD/MM/YYYY"
+            updated: latest.timestamp
+              ? latest.timestamp.split(" ")[0].split("-").reverse().join("/")
+              : "",
+            stages: history.map(
+              (h: any) => h.pos_code ?? h.current_location ?? "X"
+            ),
+            status: latest.overall_status || latest.ai_journey_score || "Unknown",
+          });
+        });
+
+        setData(arr);
+      } catch (e: any) {
+        console.error(e);
+        setError(e.message || "Gagal fetch data");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    load();
+  }, []);
+
+  const filteredData = data
     .filter((d) =>
       (d.name + d.id).toLowerCase().includes(search.toLowerCase())
     )
@@ -116,6 +151,10 @@ export default function JourneyListPage() {
         </div>
 
         {/* CARD LIST */}
+        {loading && <div style={{ padding: 16 }}>Loading...</div>}
+        {error && !loading && (
+          <div style={{ padding: 16, color: "red" }}>Error: {error}</div>
+        )}
         <div className={styles.cardList}>
           {filteredData.map((item, idx) => (
             <JourneyCard
