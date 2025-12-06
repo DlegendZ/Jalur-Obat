@@ -30,38 +30,72 @@ def encode_condition_safe(v):
     return cond2idx.get(v, 0)
 
 # ==========================================
-# 2. Recreate model architecture
+# 2. GNN Model (same as training)
 # ==========================================
-class RouteGNN(nn.Module):
-    def __init__(self, in_channels, hidden_channels):
+class RouteGNNImproved(nn.Module):
+    def __init__(self, num_pos, num_cond,
+                 emb_dim=32, cont_dim=2,
+                 gat_hidden=64, gat_heads=4,
+                 dropout=0.25):
         super().__init__()
-        self.gat1 = GATConv(in_channels, hidden_channels, edge_dim=1, heads=2, concat=False)
-        self.gat2 = GATConv(hidden_channels, hidden_channels, edge_dim=1, heads=2, concat=False)
-        self.lin = nn.Linear(hidden_channels, 1)
+
+        # embeddings
+        self.emb_prev = nn.Embedding(num_pos, emb_dim)
+        self.emb_pos  = nn.Embedding(num_pos, emb_dim)
+        self.emb_cond = nn.Embedding(num_cond, emb_dim // 2)
+
+        total = emb_dim + emb_dim + (emb_dim // 2) + cont_dim
+        self.lin_in = nn.Linear(total, gat_hidden)
+
+        # GAT layers
+        self.gat1 = GATConv(gat_hidden, gat_hidden, heads=gat_heads, concat=False, edge_dim=1)
+        self.bn1 = nn.BatchNorm1d(gat_hidden)
+
+        self.gat2 = GATConv(gat_hidden, gat_hidden, heads=gat_heads, concat=False, edge_dim=1)
+        self.bn2 = nn.BatchNorm1d(gat_hidden)
+
+        self.dropout = nn.Dropout(dropout)
+        self.lin_out = nn.Linear(gat_hidden, 1)
 
     def forward(self, data):
-        x, edge_index, edge_attr, batch = (
-            data.x,
-            data.edge_index,
-            data.edge_attr,
-            data.batch
-        )
+        x_raw = data.x
+        prev_idx = x_raw[:, 0].long()
+        pos_idx  = x_raw[:, 1].long()
+        cond_idx = x_raw[:, 2].long()
+        cont = x_raw[:, 3:]
 
-        x = F.relu(self.gat1(x, edge_index, edge_attr))
-        x = F.relu(self.gat2(x, edge_index, edge_attr))
-        x = global_mean_pool(x, batch)
-        return self.lin(x).squeeze()
+        prev_emb = self.emb_prev(prev_idx)
+        pos_emb  = self.emb_pos(pos_idx)
+        cond_emb = self.emb_cond(cond_idx)
+
+        node_feat = torch.cat([prev_emb, pos_emb, cond_emb, cont], dim=1)
+
+        h = F.relu(self.lin_in(node_feat))
+        h = F.relu(self.gat1(h, data.edge_index, data.edge_attr))
+        h = self.bn1(h)
+
+        h = F.relu(self.gat2(h, data.edge_index, data.edge_attr))
+        h = self.bn2(h)
+
+        hg = global_mean_pool(h, data.batch)
+        out = self.lin_out(hg).squeeze()
+
+        return out
 
 # ==========================================
-# 3. Load model
+# 3. Load Model
 # ==========================================
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = RouteGNN(in_channels=5, hidden_channels=32).to(device)
-model.load_state_dict(torch.load("model/route_gnn.pth", map_location=device))
+
+num_pos = len(pos_encoder.classes_)
+num_cond = len(condition_encoder.classes_)
+
+model = RouteGNNImproved(num_pos, num_cond).to(device)
+model.load_state_dict(torch.load("model/route_gnn_improved.pth", map_location=device))
 model.eval()
 
 # ==========================================
-# 4. Inference function
+# 4. Inference Function
 # ==========================================
 def predict_route(json_data):
 
@@ -69,10 +103,10 @@ def predict_route(json_data):
     if logs is None or not isinstance(logs, list) or len(logs) < 2:
         return {"error": "JSON must contain 'route' list with at least 2 entries"}
 
-    # process nodes
     node_features = []
     timestamps = []
 
+    # Build nodes
     for i, log in enumerate(logs):
         pos = log.get("pos_code", "UNK")
         cond = log.get("condition", condition_classes[0])
@@ -94,25 +128,24 @@ def predict_route(json_data):
         except:
             timestamps.append(i)
 
-    # reorder by timestamp if real datetime
+    # Reorder nodes by timestamp (optional)
     try:
-        df_tmp = pd.DataFrame(node_features)
-        df_tmp["ts"] = timestamps
+        df = pd.DataFrame(node_features)
+        df["ts"] = timestamps
         if any(isinstance(t, datetime) for t in timestamps):
-            df_tmp = df_tmp.sort_values("ts").reset_index(drop=True)
-        node_features = df_tmp.iloc[:, :5].values.tolist()
+            df = df.sort_values("ts").reset_index(drop=True)
+        node_features = df.iloc[:, :5].values.tolist()
     except:
         pass
 
+    # Build tensors
     x = torch.tensor(node_features, dtype=torch.float)
 
-    # build edges
     src = torch.arange(0, x.shape[0] - 1)
     tgt = torch.arange(1, x.shape[0])
     edge_index = torch.stack([src, tgt], dim=0)
 
-    # edge attributes
-    pos_seq = [int(xi[1]) for xi in node_features]
+    pos_seq = [int(n[1]) for n in node_features]
     edge_attr = torch.tensor(
         [[1.0 if pos_seq[i] != pos_seq[i+1] else 0.0] for i in range(len(pos_seq)-1)],
         dtype=torch.float
