@@ -6,7 +6,6 @@ import Link from "next/link";
 type Stage = {
   location: string;
   time: string;
-  officerName?: string;
   officerId?: string;
   quantity?: string;
   temperature?: string;
@@ -66,13 +65,12 @@ async function getJourneyById(id: string): Promise<Journey> {
       location: h.pos_code ?? h.current_location ?? "X",
 
       // Mengambil detail dari kolom database
-      officerName: h.officer_name,
       officerId: h.officer_id,
       quantity: h.quantity ? String(h.quantity) : undefined,
       temperature: h.temperature ? `${h.temperature}°C` : undefined, // Asumsi kolom temp adalah angka
       humidity: h.humidity ? `${h.humidity}%` : undefined, // Asumsi kolom humidity adalah angka
       expeditionType: h.expedition_type,
-      additional: h.additional_text,
+      additional: h.additional,
     }));
 
     // Mengembalikan objek Journey yang valid
@@ -132,7 +130,6 @@ export default async function JourneyDetail({ params }: Props) {
               <div className={styles.time}>{stage.time}</div>
             </div>
 
-            <div className={styles.field}>Officer Name: {stage.officerName ?? "-"}</div>
             <div className={styles.field}>Officer ID: {stage.officerId ?? "-"}</div>
             <div className={styles.field}>Quantity: {stage.quantity ? `${stage.quantity} pcs` : "-"}</div>
             <div className={styles.field}>Temperature: {stage.temperature ?? "-"}</div>
@@ -148,3 +145,4 @@ export default async function JourneyDetail({ params }: Props) {
     </div>
   );
 }
+
