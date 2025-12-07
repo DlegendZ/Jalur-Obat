@@ -57,10 +57,10 @@ export default function JourneyListPage() {
 
             stages: history.map((h: any) => ({
               location: h.pos_code ?? h.current_location ?? "X",
-              quantity: h.quantity != null ? h.quantity : 0,
+              quantity: h.quantity != null ? Number(h.quantity) : 0,
               status: h.overall_status || "Unknown",
             })),
-            status: latest.ai_journey_score || "Unknown",
+            status: latest.ai_journey_score || "N/A",
           });
         });
 
@@ -177,4 +177,5 @@ export default function JourneyListPage() {
       </div>
     </div>
   );
+
 }
