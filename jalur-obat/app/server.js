@@ -185,7 +185,7 @@ app.get("/list_journey", async (req, res) => {
           expedition_type,
           journey_status,
           to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS timestamp,
-          officer_id,
+          officer_id
         FROM medicine_info
         WHERE serial_number = $1
         ORDER BY created_at`,
@@ -207,7 +207,7 @@ app.get("/list_journey", async (req, res) => {
           expedition_type,
           journey_status,
           to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS timestamp,
-          officer_id,
+          officer_id
         FROM medicine_info
         WHERE serial_number = $1
         ORDER BY created_at
