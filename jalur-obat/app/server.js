@@ -8,12 +8,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());    
-app.use(express.json());  
+app.use(cors());
+app.use(express.json());
 
 
 app.get("/", (req, res) => {
-    res.send("API is running");
+  res.send("API is running");
 });
 
 app.post("/update_journey", async (req, res) => {
@@ -43,7 +43,7 @@ app.post("/update_journey", async (req, res) => {
       !current_location ||
       !quan ||
       !temp ||
-      !humid||
+      !humid ||
       !overall_status ||
       !expedition_type ||
       !journey_status
@@ -52,12 +52,12 @@ app.post("/update_journey", async (req, res) => {
     }
 
     const currentPoint = {
-      medicine_name,                
-      pos_code: current_location, 
-      condition: overall_status,     
+      medicine_name,
+      pos_code: current_location,
+      condition: overall_status,
       temperature,
       humidity,
-      timestamp: formatNow()         
+      timestamp: formatNow()
     };
 
     const routeData = await query(
@@ -118,7 +118,7 @@ app.post("/update_journey", async (req, res) => {
         medicine_name,
         current_location,
         quan,
-        additional,             
+        additional,
         temp,
         humid,
         overall_status,
@@ -128,8 +128,8 @@ app.post("/update_journey", async (req, res) => {
         ai_journey_score
       ]
     );
-      res.status(201).json(result.rows[0]);
-  } 
+    res.status(201).json(result.rows[0]);
+  }
   catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
@@ -141,11 +141,11 @@ function formatNow() {
 
   const pad = (n) => String(n).padStart(2, "0");
   const yyyy = now.getFullYear();
-  const mm   = pad(now.getMonth() + 1);
-  const dd   = pad(now.getDate());
-  const hh   = pad(now.getHours());
-  const mi   = pad(now.getMinutes());
-  const ss   = pad(now.getSeconds());
+  const mm = pad(now.getMonth() + 1);
+  const dd = pad(now.getDate());
+  const hh = pad(now.getHours());
+  const mi = pad(now.getMinutes());
+  const ss = pad(now.getSeconds());
 
   return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}`;
 }
@@ -175,15 +175,17 @@ app.get("/list_journey", async (req, res) => {
           report_id,
           medicine_name,
           current_location AS pos_code,
+          quantitiy,
           overall_status AS condition,
           temperature,
           humidity,
           additional,
           ai_score_fake_result,
-          overall_status,
+          ai_journey_score,
           expedition_type,
           journey_status,
-          to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS timestamp
+          to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS timestamp,
+          officer_id,
         FROM medicine_info
         WHERE serial_number = $1
         ORDER BY created_at`,
@@ -195,22 +197,24 @@ app.get("/list_journey", async (req, res) => {
           report_id,
           medicine_name,
           current_location AS pos_code,
+          quantitiy,
           overall_status AS condition,
           temperature,
           humidity,
           additional,
           ai_score_fake_result,
-          overall_status,
+          ai_journey_score,
           expedition_type,
           journey_status,
-          to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS timestamp
+          to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS timestamp,
+          officer_id,
         FROM medicine_info
         WHERE serial_number = $1
         ORDER BY created_at
         LIMIT 1`,
         [serial] //INI PAKE KALAU BUTUH LATEST DATA 
       );
-      
+
       const history = route_history.rows;
       const latest = route_latest.rows;
 
@@ -223,9 +227,9 @@ app.get("/list_journey", async (req, res) => {
       });
     }
 
-    res.status(200).json({ results_history }); 
+    res.status(200).json({ results_history });
     // res.status(200).json({results_latest}); BUTUH YANG MANA TINGGAL DI COMMEN/UNCOMMEN
-  } 
+  }
   catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
@@ -233,5 +237,5 @@ app.get("/list_journey", async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
