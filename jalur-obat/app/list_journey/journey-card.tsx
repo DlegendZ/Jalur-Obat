@@ -8,20 +8,6 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
   isExpanded: boolean;
   onClick: () => void;
 }) {
-  const stageDetails = {
-    "A": { quantity: "1000 pcs", quality: "Excellent" },
-    "B": { quantity: "980 pcs", quality: "Excellent" },
-    "D": { quantity: "950 pcs", quality: "Good" },
-    "E": { quantity: "920 pcs", quality: "Good" },
-    "M": { quantity: "900 pcs", quality: "Fair" },
-    "F": { quantity: "890 pcs", quality: "Fair" },
-    "P": { quantity: "880 pcs", quality: "Poor" },
-    "Z": { quantity: "870 pcs", quality: "Poor" },
-    "O": { quantity: "860 pcs", quality: "Poor" },
-    "X": { quantity: "N/A", quality: "No Data" }
-  };
-
-  const defaultDetail = stageDetails["X"];
 
   const currentStage = (data.stages && data.stages.length > 0) ? data.stages[data.stages.length - 1] : null;
 
@@ -45,18 +31,15 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
         {isExpanded ? (
           <div className={styles.verticalStages}>
             <div className={styles.verticalLine}></div>
-            {data.stages.map((stage: string, index: number) => {
-              // 👇 Gunakan defaultDetail jika stageDetails[stage] adalah undefined
-              const detail = stageDetails[stage as keyof typeof stageDetails] || defaultDetail;
+            {data.stages.map((stage: any, index: number) => {
 
               return (
                 <div key={index} className={styles.verticalStage}>
                   <div className={styles.verticalDot}></div>
                   <div className={styles.stageInfo}>
-                    <span className={styles.stageLetter}>{stage}</span>
-                    {/* Sekarang aman menggunakan detail.quantity dan detail.quality */}
-                    <span className={styles.stageQuantity}>{detail.quantity}</span>
-                    <span className={styles.stageQuality}>{detail.quality}</span>
+                    <span className={styles.stageLetter}>{stage.location}</span>
+                    <span className={styles.stageQuantity}>{stage.quantity}</span>
+                    <span className={styles.stageQuality}>{stage.status}</span>
                   </div>
                 </div>
               );
@@ -66,10 +49,10 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
           <>
             <div className={styles.connectingLine}></div>
             <div className={styles.dotLine}>
-              {data.stages.map((stage: string, index: number) => (
+              {data.stages.map((stage: any, index: number) => (
                 <div key={index} className={styles.dotStage}>
                   <div className={styles.dot}></div>
-                  <span className={styles.stageLetter}>{stage}</span>
+                  <span className={styles.stageLetter}>{stage.location}</span>
                 </div>
               ))}
             </div>
@@ -78,12 +61,12 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
       </div>
 
       <div className={styles.aiScoreRow}>
-        <span className={styles.aiScore}>AI Score : {data.score}%</span>
+        <span className={styles.aiScore}>AI Score: {data.score}%</span>
       </div>
 
       <div className={styles.statusUpdateRow}>
         <div className={styles.statusLeft}>
-          <span className={styles.onGoing}>On Going</span>
+          <span className={styles.onGoing}>{data.journeyStatus}</span>
           <span className={styles.lastUpdated}>Last Updated : {data.updated}</span>
         </div>
         <div className={styles.statusRight}>
@@ -95,7 +78,7 @@ export default function JourneyCard({ data, isExpanded, onClick }: {
         <div className={styles.currentCondition}>
           <span className={styles.currentConditionLabel}>Current Condition:</span>
           <span className={styles.currentConditionValue}>
-            {currentStage ? (stageDetails[currentStage as keyof typeof stageDetails] || defaultDetail).quality : "Unknown"}
+            {data.currentCondition || "Unknown"}
           </span>
           <button className={styles.detailButton} onClick={(e) => { e.stopPropagation(); handleDetailClick(e); }}>
             Detail

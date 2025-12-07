@@ -47,14 +47,20 @@ export default function JourneyListPage() {
               latest.ai_score_fake_result != null
                 ? Number(latest.ai_score_fake_result)
                 : 0,
+            journeyStatus: latest.journey_status || "Unknown",
             // "YYYY-MM-DD HH:MM:SS" -> "DD/MM/YYYY"
             updated: latest.timestamp
               ? latest.timestamp.split(" ")[0].split("-").reverse().join("/")
               : "",
-            stages: history.map(
-              (h: any) => h.pos_code ?? h.current_location ?? "X"
-            ),
-            status: latest.overall_status || latest.ai_journey_score || "Unknown",
+
+            currentCondition: latest.overall_status || "Unknown",
+
+            stages: history.map((h: any) => ({
+              location: h.pos_code ?? h.current_location ?? "X",
+              quantity: h.quantity != null ? h.quantity : 0,
+              status: h.overall_status || "Unknown",
+            })),
+            status: latest.ai_journey_score || "Unknown",
           });
         });
 
