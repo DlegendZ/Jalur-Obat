@@ -239,7 +239,7 @@ export default function JourneyUpdatePage() {
             <option>Sea</option>
           </select>
 
-          <label className="label">Upload Photo*</label>
+          <label className="label">Upload Photo</label>
 
           <div className="upload-wrapper">
   <button
@@ -296,4 +296,5 @@ export default function JourneyUpdatePage() {
       </div>
     </div>
   ); 
+
 }
