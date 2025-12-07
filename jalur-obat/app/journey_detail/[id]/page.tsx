@@ -26,51 +26,66 @@ type Props = {
   params: Promise<{ id: string }> | { id: string };
 };
 
-// Contoh placeholder fetch function -> ganti dengan fetch/DB asli
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+
 async function getJourneyById(id: string): Promise<Journey> {
-  // contoh mock data (3 lokasi)
-  return {
-    id,
-    name: "OBH KOMIK",
-    stages: [
-      {
-        location: "A",
-        time: "13:23:12 22/1/2022",
-        officerName: "Budi",
-        officerId: "OFF-001",
-        quantity: "1000",
-        temperature: "25°C",
-        humidity: "60%",
-        expeditionType: "Truck",
-        additional: "No issues",
-        imageUrl: "/placeholder.png",
-      },
-      {
-        location: "B",
-        time: "14:10:00 22/1/2022",
-        officerName: "Siti",
-        officerId: "OFF-002",
-        quantity: "980",
-        temperature: "26°C",
-        humidity: "58%",
-        expeditionType: "Van",
-        additional: "Delay 10min",
-        imageUrl: "/placeholder.png",
-      },
-      {
-        location: "D",
-        time: "15:00:00 22/1/2022",
-        officerName: "Andi",
-        officerId: "OFF-003",
-        quantity: "950",
-        temperature: "24°C",
-        humidity: "62%",
-        expeditionType: "Bike",
-        additional: "Checked seals",
-        imageUrl: "/placeholder.png",
-      },
-    ],
-  };
+  const defaultJourney: Journey = { id, name: "Unknown Drug", stages: [] };
+
+  try {
+    // Fetch seluruh data journey dari API
+    const res = await fetch(`${API_BASE}/list_journey`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) {
+      console.error(`HTTP error: ${res.status}`);
+      return defaultJourney;
+    }
+    const json = await res.json();
+
+    // Cari data yang sesuai dengan ID serial
+    // Kita cari objek di array results_history di mana kuncinya (serial number) cocok dengan ID
+    const matchingObj = (json.results_history || []).find((obj: any) => Object.keys(obj)[0] === id);
+
+    if (!matchingObj) {
+      console.warn(`Journey ID ${id} not found in API response.`);
+      return defaultJourney;
+    }
+
+    const history = matchingObj[id] as any[];
+    if (!history || history.length === 0) return defaultJourney;
+
+    const latest = history[history.length - 1];
+
+    // Transformasi data history ke format Stage[]
+    const stages: Stage[] = history.map((h: any) => ({
+      // Formatting timestamp dari YYYY-MM-DD HH:MM:SS ke HH:MM:SS DD/MM/YYYY
+      time: h.timestamp
+        ? `${h.timestamp.split(' ')[1]} ${h.timestamp.split(' ')[0].split('-').reverse().join('/')}`
+        : "N/A",
+
+      location: h.pos_code ?? h.current_location ?? "X",
+
+      // Mengambil detail dari kolom database
+      officerName: h.officer_name,
+      officerId: h.officer_id,
+      quantity: h.quantity ? String(h.quantity) : undefined,
+      temperature: h.temperature ? `${h.temperature}°C` : undefined, // Asumsi kolom temp adalah angka
+      humidity: h.humidity ? `${h.humidity}%` : undefined, // Asumsi kolom humidity adalah angka
+      expeditionType: h.expedition_type,
+      additional: h.additional_text,
+    }));
+
+    // Mengembalikan objek Journey yang valid
+    return {
+      id: id,
+      name: latest.medicine_name || "Unknown Drug",
+      stages: stages,
+    };
+
+  } catch (e) {
+    console.error("Failed to fetch journey data:", e);
+    return defaultJourney; // Selalu kembalikan default jika terjadi error
+  }
 }
 
 export default async function JourneyDetail({ params }: Props) {
@@ -117,17 +132,14 @@ export default async function JourneyDetail({ params }: Props) {
               <div className={styles.time}>{stage.time}</div>
             </div>
 
-            <div className={styles.field}>Officer Name : {stage.officerName ?? "-"}</div>
-            <div className={styles.field}>Officer ID : {stage.officerId ?? "-"}</div>
-            <div className={styles.field}>Quantity : {stage.quantity ?? "-"}</div>
-            <div className={styles.field}>Temperature : {stage.temperature ?? "-"}</div>
-            <div className={styles.field}>Humidity : {stage.humidity ?? "-"}</div>
-            <div className={styles.field}>Expedition Type : {stage.expeditionType ?? "-"}</div>
-            <div className={styles.field}>Additional : {stage.additional ?? "-"}</div>
+            <div className={styles.field}>Officer Name: {stage.officerName ?? "-"}</div>
+            <div className={styles.field}>Officer ID: {stage.officerId ?? "-"}</div>
+            <div className={styles.field}>Quantity: {stage.quantity ? `${stage.quantity} pcs` : "-"}</div>
+            <div className={styles.field}>Temperature: {stage.temperature ?? "-"}</div>
+            <div className={styles.field}>Humidity: {stage.humidity ?? "-"}</div>
+            <div className={styles.field}>Expedition Type: {stage.expeditionType ?? "-"}</div>
+            <div className={styles.field}>Additional: {stage.additional ?? "-"}</div>
 
-            <div className={styles.imagePlaceholder}>
-              {stage.imageUrl ? <img src={stage.imageUrl} alt={`img-${stage.location}`} /> : "image"}
-            </div>
           </div>
         ))}
 
