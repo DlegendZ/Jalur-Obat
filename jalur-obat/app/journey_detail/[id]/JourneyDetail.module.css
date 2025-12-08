@@ -11,6 +11,7 @@
 
 .phone {
     width: 325px;
+    min-height: 659px;
     max-height: 659px;
     background-color: #cbe9ff;
     border-radius: 10px;
