@@ -157,9 +157,16 @@ export default function JourneyListPage() {
         </div>
 
         {/* CARD LIST */}
-        {loading && <div style={{ padding: 16 }}>Loading...</div>}
+        {loading && <div style={{ padding: 16, textAlign: 'center' }}>Loading...</div>}
         {error && !loading && (
-          <div style={{ padding: 16, color: "red" }}>Error: {error}</div>
+          <div style={{ padding: 16, color: "red", textAlign: 'center', fontWeight: 'bold' }}>
+            Failed to load data. Check your connection to the server. :(
+          </div>
+        )}
+        {!loading && !error && filteredData.length === 0 && (
+          <div style={{ padding: '40px 16px', textAlign: 'center', color: '#03254c', fontSize: '16px' }}>
+            Still Empty.
+          </div>
         )}
         <div className={styles.cardList}>
           {filteredData.map((item, idx) => (
