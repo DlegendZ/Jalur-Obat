@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+
+.jo-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222222;
+}
+
+.jo-wrapper {
+  position: relative;
+}
+
+.jo-phone {
+  width: 325px;          
+  height: 659px;     
+  background-color: #cbe9ff;
+  border-radius: 10px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.jo-logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jo-logo-image {
+  max-width: 300px;
+  height: auto;
+}
+
+.jo-start-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 80%;
+  padding: 10px 0;
+  border-radius: 999px;
+  border: 1px solid #03254c;
+  background-color: transparent;
+  color: #03254c;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.jo-start-button:hover {
+  background-color: #03254c;
+  color: #ffffff;
+}
+
+.jo-start-button:active {
+  transform: scale(0.97);
+}

@@ -1,0 +1,30 @@
+CREATE TABLE medicine_info (
+  report_id SERIAL PRIMARY KEY,
+  serial_number TEXT NOT NULL,
+  medicine_name TEXT NOT NULL,
+  current_location TEXT NOT NULL,
+  quantity INTEGER NOT NULL,
+  additional TEXT,
+  temperature NUMERIC(5,2) NOT NULL,
+  humidity NUMERIC(5,2) NOT NULL,
+  ai_score_fake_result NUMERIC(5,2),
+  ai_journey_score TEXT NOT NULL CHECK (
+      ai_journey_score IN ('Safe', 'Need Attention', 'Full Attention', 'Faked', 'Unknown')
+  ),
+  overall_status TEXT NOT NULL CHECK (
+      overall_status IN (
+        'Safe', 'Need Attention', 'Bad'
+      )
+  ),
+  expedition_type TEXT NOT NULL CHECK (
+      expedition_type IN ('Land', 'Air', 'Sea')
+  ),
+  created_at TIMESTAMP DEFAULT NOW(),
+  officer_id TEXT NOT NULL,
+  journey_status TEXT NOT NULL CHECK (
+      journey_status IN ('start', 'update', 'end')
+  )
+);
+
+GRANT ALL PRIVILEGES ON TABLE medicine_info TO YOUR-USERNAME;
+GRANT USAGE, SELECT ON SEQUENCE medicine_info_report_id_seq TO YOUR-USERNAME;
