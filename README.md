@@ -2,7 +2,7 @@
 
 # Jalur Obat
 
-**AI-Based Counterfeit Medicine Distribution Detection System**
+AI-Based Counterfeit Medicine Distribution Detection System
 
 ---
 
