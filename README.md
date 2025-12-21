@@ -2,7 +2,7 @@
 
 # Jalur Obat
 
-AI-Based Counterfeit Medicine Distribution Detection System
+**AI-Based Counterfeit Medicine Distribution Detection System**
 
 ---
 
@@ -225,5 +225,3 @@ Jalur Obat provides an integrated solution for tracking medicine distribution an
 Proper setup of dependencies, database configuration, and service execution is required to run the system successfully.
 
 ---
-
-tell me which one and I’ll convert it immediately.
