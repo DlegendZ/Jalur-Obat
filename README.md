@@ -2,7 +2,7 @@
 
 # Jalur Obat
 
-**AI-Based Counterfeit Medicine Distribution Detection System**
+* **AI-Based Counterfeit Medicine Distribution Detection System**
 
 ---
 
@@ -223,5 +223,3 @@ DB_PORT=5432
 
 Jalur Obat provides an integrated solution for tracking medicine distribution and detecting counterfeit risks through structured data collection and AI-based evaluation.
 Proper setup of dependencies, database configuration, and service execution is required to run the system successfully.
-
----
